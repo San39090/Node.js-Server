@@ -18,8 +18,12 @@ const server = http.createServer((req,res)=>{
 
     fs.readFile(filePath,(err,data)=>{
         if(err){
-            res.statusCode = 500;
-            res.end("Server Error");
+            err.path = path.join(publicPath, '404.html');
+            //console.log(err.path);
+            fs.readFile(err.path,(err,data)=>{
+                res.end(data);
+            })
+            //res.end(err.path);
         }
         else{
             res.writeHead(200,{'content-Type':'text/html'});
