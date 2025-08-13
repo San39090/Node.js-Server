@@ -18,6 +18,7 @@ const server = http.createServer((req,res)=>{
 
     fs.readFile(filePath,(err,data)=>{
         if(err){
+            res.statusCode = 500;
             res.end("Server Error");
         }
         else{
